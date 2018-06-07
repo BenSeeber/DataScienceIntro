@@ -2,11 +2,13 @@
 #Wie z.B. das jetzt eine Library Installiert wird.
 install.packages('rbokeh')
 install.packages('xgboost')
+install.packages('keras')
 
 #Ups... jetzt sind doch ein paar mehr Packete installiert
 #Dann können diese jetzt auch geladen werden
 library(rbokeh)
 library(xgboost)
+library(keras)
 
 #Wie erfolgt die Referenzierung in R? Ganz einfach mit einem <- 
 #Dann kann man einfach einer Variablen einen Character zuweisen
