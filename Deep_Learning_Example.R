@@ -68,3 +68,25 @@ history <- model %>% fit(
 #plot statistics
 str(history)
 plot(history)
+
+#Retrain from Scratch with 4 epochs
+model <- keras_model_sequential() %>%
+  layer_dense(units = 16, activation = "relu", input_shape = c(10000)) %>%
+  layer_dense(units = 16, activation = "relu") %>%
+  layer_dense(units = 1, activation = "sigmoid")
+model %>% compile(
+  optimizer = "rmsprop",
+  loss = "binary_crossentropy",
+  metrics = c("accuracy")
+)
+model %>% fit(x_train, y_train, epochs = 4, batch_size = 512)
+results <- model %>% evaluate(x_test, y_test)
+
+#Apply Model
+
+y_pred <- model %>% predict(x_test[1:10,])
+
+library(rbokeh)
+figure() %>%
+  ly_points(data.frame(seq(1,10),y_test[1:10])) %>%
+  ly_points(data.frame(seq(1,10),y_pred[1:10]),color='red')
