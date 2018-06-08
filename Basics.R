@@ -28,8 +28,9 @@ sprintf("Ich bin ein %s",typeof(Ganzzahl))
 
 #So jetzt mal ein Vektor
 cooler_vector <- c('ich','bin','ein','vecotr')
+
 #und ich kann auch anders
-cooler_vector[1]
+cooler_vector[1:2]
 
 #mit dem
 cooler_vector_zwei <- c('Ich','bin','noch','geiler','Dude')
@@ -38,7 +39,7 @@ cooler_vector_zwei <- c('Ich','bin','noch','geiler','Dude')
 gang <- data.frame(cooler_vector,cooler_vector_zwei)
 #ups... muss wohl einer gehen, füße ab
 gang <- data.frame(cooler_vector,head(cooler_vector_zwei,-1))
-
+gang
 #jetzt noch die Namen
 colnames(gang) <- c('Coole','Nase')
 
@@ -59,6 +60,8 @@ geilefunktion <- function(input)
 }
 
 geilefunktion(gang)
+
+typeof(gang$Coole[1])
 
 
 

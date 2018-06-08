@@ -9,11 +9,12 @@ library(xgboost)
 #An other nice plot package
 library(rbokeh)
 
-newdata = Prestige[,c(1:2)]
-
+newdata <- Prestige[,c("education","income")]
+max(newdata$education)
+min(newdata$education)
 # fit a linear model and run a summary of its results.
 set.seed(1)
-education.c = scale(newdata$education, center=TRUE, scale=FALSE)
+education.c <- scale(newdata$education, center=TRUE, scale=FALSE)
 mod = lm(income ~ education.c, data = newdata)
 summary(mod)
 
@@ -27,8 +28,8 @@ train.pred_lm <- predict(mod)
 
 train.data <- data.matrix(scale(newdata$education, center=TRUE, scale=FALSE))
 train.label <- data.matrix(newdata$income)
-mod2 <- xgboost(data = train.data, label = train.label, max_depth = 10, eta = 0.015, nthread = 4, 
-          nrounds = 1000, objective = "reg:linear")
+mod2 <- xgboost(data = train.data, label = train.label, max_depth = 10, eta = 0.1, nthread = 4, 
+          nrounds = 100, objective = "reg:linear")
 
 train.pred <- predict(mod2, train.data)
 
