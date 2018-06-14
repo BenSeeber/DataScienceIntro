@@ -1,4 +1,7 @@
 library(keras)
+library(reticulate)
+use_condaenv("tfdeeplearning")
+use_backend("plaidml")
 
 imdb <- dataset_imdb(num_words = 10000)
 c(c(train_data, train_labels), c(test_data, test_labels)) %<-% imdb

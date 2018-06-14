@@ -54,8 +54,6 @@ file.copy(file.path(original_dataset_dir, fnames),
 
 #Load pretrained Network
 library(keras)
-library(reticulate)
-#use_backend("plaidml")
 
 conv_base <- application_vgg16(
   weights = "imagenet",
@@ -97,7 +95,7 @@ train_generator <- flow_images_from_directory(
   train_dir,                  # Target directory  
   train_datagen,              # Data generator
   target_size = c(150, 150),  # Resizes all images to 150 × 150
-  batch_size = 50,
+  batch_size = 20,
   class_mode = "binary"       # binary_crossentropy loss for binary labels
 )
 
@@ -105,7 +103,7 @@ validation_generator <- flow_images_from_directory(
   validation_dir,
   test_datagen,
   target_size = c(150, 150),
-  batch_size = 50,
+  batch_size = 20,
   class_mode = "binary"
 )
 
@@ -118,7 +116,7 @@ model %>% compile(
 history <- model %>% fit_generator(
   train_generator,
   steps_per_epoch = 100,
-  epochs = 2,
+  epochs = 1,
   validation_data = validation_generator,
   validation_steps = 50
 )
@@ -142,5 +140,6 @@ pred_bi[pred_bi>0.5]<-1
 pred_bi[pred_bi<=0.5]<-0
 
 data.frame(a[[2]],pred_bi)
+
 
 
